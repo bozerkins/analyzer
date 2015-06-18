@@ -23,5 +23,11 @@ What makes Pure glass analytics different from other BI tools
 
  * It is not a ready software soltion, but a framework for BI, thus is extendable and adaptable within given environment.
  * Provides real time data analysis tools, which can be used for any data aggregation and storage.
- * 
+ * Implements mapping and aggregator modules, extendable to custom data processing
+ * Implements on-demand data summarization, by storing relational data aggregated into dimensions
+ * Implements dimensional service, which provides full control over data dimensions (data attributes to group by)
+ * Implements relational data storage, which is aggregated into dimensions, thus storing RAW data is fully optional
+ * Provides data processing monitoring interface and tools, which makes it easier to manage the whole system
+
+Aiming at easy to use data processing is a key factor in Pure glass analytics development.
 
