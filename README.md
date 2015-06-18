@@ -1,4 +1,4 @@
-# Pure glass analytics
+# Pure Glass Analytics
 
 ## Description
 
@@ -8,7 +8,7 @@ A program built with PHP / MySQL technology stack, is easy to download and insta
 
 Based on aquired information data structure implies both relational representation and summary tables representation, which makes data aquiring mechanism more efficient, provides more control over what happens with data behind the scene.
 
-Aimed at realtime processing, Pure glass analytics provides a strong basis for minor BIs data analysis.
+Aimed at realtime processing, Pure Glass Analytics provides a strong basis for minor BIs data analysis.
 
 ## Requirements
 
@@ -19,7 +19,7 @@ Aimed at realtime processing, Pure glass analytics provides a strong basis for m
 
 ## Functionality information
 
-What makes Pure glass analytics different from other BI tools
+What makes Pure Glass Analytics different from other BI tools
 
  * It is not a ready software soltion, but a framework for BI, thus is extendable and adaptable within given environment.
  * Provides real time data analysis tools, which can be used for any data aggregation and storage.
