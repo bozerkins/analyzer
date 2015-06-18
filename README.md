@@ -7,4 +7,4 @@ A program built with PHP / MySQL technology stack, is easy to download and insta
 
 Based on aquired information data structure implies both relational representation and summary tables representation, which makes data aquiring mechanism more efficient, provides more control over what happens with data behind the scene.
 
-Aimed at realtime reporting and analysis, Pure glass analytics provides a strong basis for minor BI data analysis.
+Aimed at realtime processing, Pure glass analytics provides a strong basis for minor BIs data analysis.
