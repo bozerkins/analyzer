@@ -21,11 +21,34 @@ class Router
 		// create lazy loading services from conviguration
 		$container->addRegistry($container->get('config')->get('services'));
 
+		// get query parser
+		$parser = $query->makeParser();
 
+		// get plugin name
+		$plugin = $parser->getPluginName();
 
-		throw new \ErrorException('Write ROUTER LOGICS');
+		// get controller class
+		$controller = $parser->getControllerClass();
 
-		$response = new Response('Default message');
+		// get controller method
+		$method = $parser->getControllerMethod();
+
+		// invoke controller
+		$response = $this->invoke($plugin, $controller, $method);
+
+		// validate response
+		if (!$response instanceof Response) {
+			throw new \ErrorException('fucking awesome');
+		}
+
+		// return response
 		return $response;
+	}
+
+	protected function invoke($plugin, $class, $method)
+	{
+		$className = 'PureGlassAnalytics\\Plugins\\' . $plugin . '\\Controller\\' . $class . 'Controller';
+		$object = new $className();
+		return $object->{$method}();
 	}
 }
