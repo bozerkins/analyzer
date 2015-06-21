@@ -1,0 +1,32 @@
+{
+    "name": "pure-glass-analytics/pure-glass-analytics",
+    "type": "application",
+    "description": "a framework for fast data processing and analysis",
+    "keywords": [
+	    "pure glass",
+	    "web",
+		"business intelligence",
+	    "analytics"
+	  ],
+    "homepage": "http://pureglassanalytics.org",
+    "authors": [
+        {
+            "name": "Bogdans Ozerkins",
+            "email": "b.ozerkins@gmail.com",
+        }
+	],
+    "support": {
+        "issues": "https://github.com/pure-glass-analytics/pure-glass-analytics/issues",
+        "wiki": "https://github.com/pure-glass-analytics/pure-glass-analytics/wiki",
+        "source": "https://github.com/pure-glass-analytics/pure-glass-analytics"
+    },
+    "autoload": {
+        "psr-4": {
+			"PureGlassAnalytics\\": "core/",
+            "PureGlassAnalytics\\Plugins\\": "plugins/"
+        },
+    },
+    "require": {
+        "php": ">=5.3.3",
+    }
+}
