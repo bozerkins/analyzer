@@ -3,21 +3,21 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use PureGlassAnalytics\HttpFoundation\Request;
-use PureGlassAnalytics\Router\Router;
-use PureGlassAnalytics\Router\RouterQuery;
+use PureGlassAnalytics\Route\Route;
+use PureGlassAnalytics\Route\RouteQuery;
 
 // create the Request object
 $request = Request::createFromGlobals();
 
 // create The Router query object
-$routerQuery = new RouterQuery();
-$routerQuery->setRequest($request);
+$routeQuery = new RouteQuery();
+$routeQuery->setRequest($request);
 
 // create the Router
-$router = new Router();
+$route = new Route();
 
 // resolve requested route
-$response = $router->resolve('development', $routerQuery);
+$response = $route->resolve('development', $routeQuery);
 
 // send the result
 $response->send();
