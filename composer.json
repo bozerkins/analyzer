@@ -12,7 +12,7 @@
     "authors": [
         {
             "name": "Bogdans Ozerkins",
-            "email": "b.ozerkins@gmail.com",
+            "email": "b.ozerkins@gmail.com"
         }
 	],
     "support": {
@@ -24,9 +24,9 @@
         "psr-4": {
 			"PureGlassAnalytics\\": "core/",
             "PureGlassAnalytics\\Plugins\\": "plugins/"
-        },
+        }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.3"
     }
 }
