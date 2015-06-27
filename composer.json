@@ -23,7 +23,7 @@
     "autoload": {
         "psr-4": {
 			"PureGlassAnalytics\\": "src/",
-            "PureGlassAnalytics\\Plugins\\": "plugins/"
+            "PureGlassAnalytics\\Package\\": "packages/"
         }
     },
     "require": {

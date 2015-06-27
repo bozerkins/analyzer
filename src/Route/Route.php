@@ -16,39 +16,40 @@ class Route
 
 		// create application Container (currently Singleton)
 		$container = Container::getInstance();
+
 		// add Configuration service to container
 		$container->set('config', $config);
+
+		// add Request service
+		$container->set('request', $query->getRequest());
+
 		// create lazy loading services from conviguration
 		$container->addRegistry($container->get('config')->get('services'));
 
-		// get query parser
-		$searcher = $query->makeSearcher();
+		// run query search
+		$query->search();
 
-		// get plugin name
-		$plugin = $searcher->getPluginName();
-
-		// get controller class
-		$controller = $searcher->getControllerClass();
-
-		// get controller method
-		$method = $searcher->getControllerMethod();
+		// check if controller found
+		if (!$query->getCallable()) {
+			throw new \ErrorException('Path not found: ' . $query->getRequestedPath());
+		}
 
 		// invoke controller
-		$response = $this->invoke($plugin, $controller, $method);
+		$response = $this->invoke($query->getCallable());
 
 		// validate response
 		if (!$response instanceof Response) {
-			throw new \ErrorException('fucking awesome');
+			throw new \ErrorException('$response variable must be and instance of Response class. Controller returned: ' . gettype($response));
 		}
 
 		// return response
 		return $response;
 	}
 
-	protected function invoke($plugin, $class, $method)
+	protected function invoke($callable)
 	{
-		$className = 'PureGlassAnalytics\\Plugins\\' . $plugin . '\\Controller\\' . $class . 'Controller';
-		$object = new $className();
-		return $object->{$method}();
+		$callable[0] = 'PureGlassAnalytics\\Package\\' . $callable[0];
+		$controller = new $callable[0]();
+		return $controller->{$callable[1]}();
 	}
 }
