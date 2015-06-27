@@ -4,10 +4,7 @@ namespace PureGlassAnalytics\Config;
 
 class Config
 {
-	// variables
 	protected $environment;
-
-	// setters | getters
 
 	public function setEnvironment($environment)
 	{
@@ -20,7 +17,6 @@ class Config
 		return $this->environment;
 	}
 
-	// main methods
 	public function get($file)
 	{
 		if (!preg_match('/^[a-zA-Z\_\/]+$/', $file)) {

@@ -24,7 +24,7 @@ class Route
 		$container->set('request', $query->getRequest());
 
 		// create lazy loading services from conviguration
-		$container->addRegistry($container->get('config')->get('services'));
+		$container->addRegistry($container->get('config')->get('service'));
 
 		// run query search
 		$query->search();

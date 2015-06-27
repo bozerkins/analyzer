@@ -3,21 +3,15 @@
 namespace PureGlassAnalytics\Route;
 
 use PureGlassAnalytics\HttpFoundation\Request;
-
-use PureGlassAnalytics\Common\Debug;
+use PureGlassAnalytics\Container\Container;
 
 class RouteQuery
 {
-	protected $defaultPackageName = 'DefaultPackage';
-	protected $defaultControllerClass = 'Default';
-	protected $defaultControllerMethod = 'index';
-
 	protected $request;
 	protected $package;
 	protected $controller;
 	protected $method;
 	protected $callable;
-
 
 	public function setRequest(Request $request)
 	{
@@ -160,31 +154,37 @@ class RouteQuery
 
 	protected function parseAsMissingMethodPath(array $pathArr)
 	{
+		$defaults = Container::getInstance()->get('config')->get('route');
+
 		$plugin = array_shift($pathArr) . '\\Controller';
 		$controller = array_pop($pathArr). 'Controller';
 		$path = implode('\\', $pathArr);
 		return array(
 			implode('\\', array_filter(array($plugin, $path, $controller))),
-			$this->defaultControllerMethod . 'Action'
+			$defaults['default_method']
 		);
 	}
 
 	protected function parseAsMissingControllerAndMathodPath(array $pathArr)
 	{
+		$defaults = Container::getInstance()->get('config')->get('route');
+
 		$plugin = array_shift($pathArr) . '\\Controller';
-		$controller = $this->defaultControllerClass . 'Controller';
+		$controller = $defaults['default_controller'];
 		$path = implode('\\', $pathArr);
 		return array(
 			implode('\\', array_filter(array($plugin, $path, $controller))),
-			$this->defaultControllerMethod . 'Action'
+			$defaults['default_method']
 		);
 	}
 
 	protected function parseAsMissingAll(array $pathArr)
 	{
+		$defaults = Container::getInstance()->get('config')->get('route');
+
 		return array(
-			$this->defaultPackageName . '\\Controller\\' . $this->defaultControllerClass . 'Controller',
-			$this->defaultControllerMethod . 'Action'
+			$defaults['default_package'] . '\\Controller\\' . $defaults['default_controller'],
+			$defaults['default_method']
 		);
 	}
 
