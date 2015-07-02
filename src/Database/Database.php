@@ -6,16 +6,16 @@ use PureGlassAnalytics\Common\Debug;
 
 class Database
 {
-	protected $connection;
+	protected $provider;
 
-	public function setConnection($connection)
+	public function setProvider(DatabaseProvider $provider)
 	{
-		$this->connection = $connection;
+		$this->provider = $provider;
 		return $this;
 	}
 
-	public function getConnection()
+	public function getProvider()
 	{
-		return $this->connection;
+		return $this->provider;
 	}
 }
