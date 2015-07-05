@@ -1,11 +1,28 @@
 <?php
 
-namespace DataStorageComponent\WebApi\Server;
+namespace PureGlassAnalytics\WebApi\Server;
+
+use PureGlassAnalytics\HttpFoundation\Request;
 
 class Server
 {
+	protected $request;
 	protected $methods = array();
 	protected $conf = array();
+
+	public function setRequest(Request $request)
+	{
+		$this->request = $request;
+		return $this;
+	}
+
+	public function getRequest()
+	{
+		if (!$this->request) {
+			throw new \ErrorException('$request variable not set');
+		}
+		return $this->request;
+	}
 
 	public function configure(array $conf)
 	{
@@ -25,13 +42,13 @@ class Server
 	public function execute()
 	{
 		$callable = $this->getCallable($this->getAction());
-		return $callable($this->getParams());
+		return call_user_func_array($callable, array($this->getParams()));
 	}
 
 	protected function getAction()
 	{
 		$actionKey = $this->getActionKey();
-		$action = $_REQUEST[$actionKey];
+		$action = $this->getRequest()->get($actionKey);
 		if (!$action) {
 			throw new \ErrorException('No action received');
 		}
@@ -50,7 +67,7 @@ class Server
 	protected function getParams()
 	{
 		$paramsKey = $this->getParamsKey();
-		$params = $_REQUEST[$paramsKey];
+		$params = $this->getRequest()->get($paramsKey);
 		if (is_null($params)) {
 			throw new \ErrorException('No params received');
 		}

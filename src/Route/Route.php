@@ -2,7 +2,7 @@
 
 namespace PureGlassAnalytics\Route;
 
-use PureGlassAnalytics\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class Route
 {

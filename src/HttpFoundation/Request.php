@@ -2,9 +2,7 @@
 
 namespace PureGlassAnalytics\HttpFoundation;
 
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
-
-class Request extends SymfonyRequest
+class Request extends \Symfony\Component\HttpFoundation\Request
 {
 
 }

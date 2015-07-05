@@ -1,6 +1,6 @@
 <?php
 
-namespace DataStorageComponent\WebApi\Client;
+namespace PureGlassAnalytics\WebApi\Client;
 
 class Client
 {
