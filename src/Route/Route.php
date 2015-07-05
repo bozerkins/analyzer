@@ -3,29 +3,11 @@
 namespace PureGlassAnalytics\Route;
 
 use PureGlassAnalytics\HttpFoundation\Response;
-use PureGlassAnalytics\Config\Config;
-use PureGlassAnalytics\Container\Container;
 
 class Route
 {
-	public function resolve($environment, RouteQuery $query)
+	public function resolve(RouteQuery $query)
 	{
-		// create apoplication Configuration
-		$config = new Config();
-		$config->setEnvironment($environment);
-
-		// create application Container (currently Singleton)
-		$container = Container::getInstance();
-
-		// add Configuration service to container
-		$container->set('config', $config);
-
-		// add Request service
-		$container->set('request', $query->getRequest());
-
-		// create lazy loading services from conviguration
-		$container->addRegistry($container->get('config')->get('service'));
-
 		// run query search
 		$query->search();
 
