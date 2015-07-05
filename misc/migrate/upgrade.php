@@ -6,6 +6,10 @@ $migration = $kernel->getContainer()->get('migration');
 
 $sqls = array();
 
+$sqls['0.0.4'] = array(
+	"INSERT INTO `config` VALUES('a123', 'b'), ('b123', 'c'), ('c123', 'd');",
+);
+
 $sqls['0.0.3'] = array(
 	"INSERT INTO `config` VALUES('a12', 'b'), ('b12', 'c'), ('c12', 'd');",
 );
@@ -28,4 +32,4 @@ $sqls['0.0.1'] = array(
 );
 
 $results = $migration->execute($sqls);
-echo implode(PHP_EOL, $results);
+echo PHP_EOL . implode(PHP_EOL, $results) . PHP_EOL;

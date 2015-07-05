@@ -22,16 +22,21 @@ class DatabaseMigration
 			$output[] = 'Executing version: ' . $version;
 			try {
 				foreach($sequence[$version] as $sql) {
-					$output[] = 'Executing: ' . $sql;
+					$output[] = 'Executing statement: ' . $sql;
 					$result = $this->getDatabase()->exec($sql);
-					$output[] = 'OK. Affected rows: ' . $result;
+					$output[] = 'Execution result: OK. Affected rows: ' . $result;
 				}
 				$this->setVersionSuccessfull($version);
 			} catch (\Exception $ex) {
-				$output[] = 'ERROR. Execution interrupted with message: ' . $ex->getMessage();
+				$output[] = 'Execution result: ERROR. Execution interrupted with message: ' . $ex->getMessage();
 				break;
 			}
 		}
+
+		if (!$versions) {
+			$output[] = 'Nothing to upgrade. Database is up-to-date.';
+		}
+
 		return $output;
 	}
 
@@ -59,12 +64,14 @@ class DatabaseMigration
 	public function getMissingVersions($versions)
 	{
 		$versionsSql = implode('\',\'', $versions);
-		$sql = "SELECT version FROM `migration` WHERE version NOT IN ('{$versionsSql}')";
+		$sql = "SELECT version FROM `migration` WHERE version IN ('{$versionsSql}')";
 
-		$missingVersions = $this->getDatabase()->query($sql)->fetchAll();
-		return array_map(function($item){
+		$executedVersions = array_map(function($item){
 			return $item['version'];
-		}, $missingVersions);
+		}, $this->getDatabase()->query($sql)->fetchAll());
+		$missingVersions = array_diff($versions, $executedVersions);
+
+		return array_values($missingVersions);
 	}
 
 	public function setVersionSuccessfull($version)
